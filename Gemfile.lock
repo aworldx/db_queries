@@ -33,6 +33,8 @@ GEM
       activemodel (= 5.2.1)
       activesupport (= 5.2.1)
       arel (>= 9.0)
+    activerecord-import (0.15.0)
+      activerecord (>= 3.2)
     activestorage (5.2.1)
       actionpack (= 5.2.1)
       activerecord (= 5.2.1)
@@ -59,6 +61,8 @@ GEM
     crass (1.0.4)
     erubi (1.7.1)
     execjs (2.7.0)
+    faker (1.8.7)
+      i18n (>= 0.7)
     ffi (1.9.25)
     globalid (0.4.1)
       activesupport (>= 4.2.0)
@@ -168,9 +172,11 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  activerecord-import (~> 0.15.0)
   bootsnap (>= 1.1.0)
   byebug
   coffee-rails (~> 4.2)
+  faker (~> 1.6, >= 1.6.6)
   jbuilder (~> 2.5)
   listen (>= 3.0.5, < 3.2)
   pg (>= 0.18, < 2.0)
