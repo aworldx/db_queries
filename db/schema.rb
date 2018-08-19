@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_08_16_195019) do
+ActiveRecord::Schema.define(version: 2018_08_19_110938) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -22,6 +22,17 @@ ActiveRecord::Schema.define(version: 2018_08_16_195019) do
     t.datetime "updated_at", null: false
     t.index ["post_id"], name: "index_likes_on_post_id"
     t.index ["user_id"], name: "index_likes_on_user_id"
+  end
+
+  create_table "pending_posts", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "post_id"
+    t.boolean "approved"
+    t.boolean "banned"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["approved"], name: "index_pending_posts_on_approved", where: "(approved = false)"
+    t.index ["banned"], name: "index_pending_posts_on_banned", where: "(banned = true)"
   end
 
   create_table "posts", force: :cascade do |t|
@@ -40,6 +51,14 @@ ActiveRecord::Schema.define(version: 2018_08_16_195019) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "likes_count", default: 0
+  end
+
+  create_table "viewed_posts", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "pending_post_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_viewed_posts_on_user_id"
   end
 
   add_foreign_key "likes", "posts"
